@@ -1,3 +1,6 @@
 {
-  "extends": ["zhlyzv"]
+  "extends": ["zhlyzv"],
+  "rules": {
+    "indent": "off"
+  }
 }
