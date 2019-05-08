@@ -1,4 +1,4 @@
-import { eachDay, startOfMonth, endOfMonth, getDay, addMonths, subMonths } from 'date-fns';
+import { eachDay, startOfMonth, endOfMonth, addMonths, subMonths } from 'date-fns';
 import * as actionTypes from './actionTypes';
 
 /**
