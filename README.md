@@ -1,5 +1,9 @@
 # React/Redux Developer Task - React Calendar
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/706feeac-427c-4108-ad55-1618cee791af/deploy-status)](https://app.netlify.com/sites/vibrant-bartik-08bf10/deploys)
+
+You should be able to preview the app [here](https://5cd49f9b0f75d2a4d58109a4--vibrant-bartik-08bf10.netlify.com/).
+
 The aim of this exercise is to create a demo calendar application using React & Redux.
 
 You should start by rendering a single month view of a calendar for the current month - along the lines of the below illustration:
@@ -20,8 +24,6 @@ Once this is rendered, please implement as many of the following requirements as
 ![My attemp 1](assets/my-attempt1.png)
 
 ![My attemp 2](assets/my-attempt2.png)
-
-You should be able to preview my app [here](https://5cd49f9b0f75d2a4d58109a4--vibrant-bartik-08bf10.netlify.com/)
 
 What currently works:
 
