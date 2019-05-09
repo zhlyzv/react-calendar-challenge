@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
 import { isToday, getDay, format } from 'date-fns';
 import uuid from 'uuid';
 import styled from 'styled-components';
-import * as actions from '../store/actions';
 import Day from './Day';
 import Reminder from './Reminder';
 import ReminderForm from './ReminderForm';
@@ -12,6 +10,7 @@ class Month extends Component {
     state = {
         reminderFormOpen: false,
         dayId: null,
+        reminder: null,
     };
 
     toggleReminderForm = dayId => {
@@ -19,11 +18,21 @@ class Month extends Component {
             reminderFormOpen: !this.state.reminderFormOpen,
             dayId,
         });
+        if (this.state.reminder) {
+            // reset reminder prop so ReminderForm opens fresh next time
+            this.setState({ reminder: null });
+        }
+    };
+
+    openReminderForm = (dayId, reminder) => {
+        console.log('update reminder');
+        this.setState({ reminder });
+        this.toggleReminderForm(dayId);
     };
 
     render() {
         let days = null;
-        const { range, onUpdateReminder, onDeleteReminder } = this.props;
+        const { range } = this.props;
         if (range.length) {
             const padding = Array(getDay(range[0].date)).fill(null);
             const paddedRange = [...padding, ...range];
@@ -32,9 +41,8 @@ class Month extends Component {
                     const formattedDay = format(day.date, 'D');
                     const reminders = day.reminders.map(r => (
                         <Reminder
-                            updateReminder={onUpdateReminder}
-                            deleteReminder={onDeleteReminder}
-                            key={uuid()}
+                            openReminderForm={() => this.openReminderForm(day.id, r)}
+                            key={r.id}
                             title={r.title}
                             colour={r.colour}
                             time={r.time}
@@ -47,7 +55,7 @@ class Month extends Component {
                             isToday={isToday(day.date)}
                         >
                             {formattedDay}
-                            {reminders}
+                            <Reminders>{reminders}</Reminders>
                         </Day>
                     );
                 }
@@ -55,13 +63,20 @@ class Month extends Component {
                 return <Day empty key={uuid()} />;
             });
         }
-        return (
-            <Fragment>
+        let reminderForm = null;
+        if (this.state.reminderFormOpen) {
+            reminderForm = (
                 <ReminderForm
                     closeModal={this.toggleReminderForm}
                     show={this.state.reminderFormOpen}
                     dayId={this.state.dayId}
+                    reminder={this.state.reminder}
                 />
+            );
+        }
+        return (
+            <Fragment>
+                {reminderForm}
                 <Wrapper>{days}</Wrapper>
             </Fragment>
         );
@@ -74,12 +89,11 @@ const Wrapper = styled.div`
     grid-template-rows: repeat(6, 200px);
 `;
 
-const mapDispatchToProps = dispatch => ({
-    onUpdateReminder: (dayId, reminder) => dispatch(actions.updateReminder(dayId, reminder)),
-    onDeleteReminder: (dayId, reminder) => dispatch(actions.deleteReminder(dayId, reminder)),
-});
+const Reminders = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+`;
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(Month);
+export default Month;

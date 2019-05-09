@@ -101,6 +101,7 @@ const reducer = (state = initialState, action) => {
                 ...state.year,
                 [state.currentMonthIndex]: updatedMonth,
             };
+
             return {
                 ...state,
                 month: updatedMonth,
@@ -108,13 +109,62 @@ const reducer = (state = initialState, action) => {
             };
         }
         case actionTypes.UPDATE_REMINDER: {
+            const { reminder, dayId } = action;
+
+            const updatedMonth = state.month.map(day => {
+                if (day.id === dayId) {
+                    // find the reminder to update
+                    const updatedReminders = day.reminders.map(r => {
+                        if (r.id === reminder.id) {
+                            return reminder;
+                        }
+                        return r;
+                    });
+                    // return the now updated day
+                    return {
+                        ...day,
+                        reminders: updatedReminders,
+                    };
+                }
+                return day;
+            });
+
+            const updatedYear = {
+                ...state.year,
+                [state.currentMonthIndex]: updatedMonth,
+            };
+
             return {
                 ...state,
+                month: updatedMonth,
+                year: updatedYear,
             };
         }
         case actionTypes.DELETE_REMINDER: {
+            const { reminder, dayId } = action;
+
+            const updatedMonth = state.month.map(day => {
+                if (day.id === dayId) {
+                    // return reminder array without the one being deleted
+                    const updatedReminders = day.reminders.filter(r => r.id !== reminder.id);
+                    // return the now updated day
+                    return {
+                        ...day,
+                        reminders: updatedReminders,
+                    };
+                }
+                return day;
+            });
+
+            const updatedYear = {
+                ...state.year,
+                [state.currentMonthIndex]: updatedMonth,
+            };
+
             return {
                 ...state,
+                month: updatedMonth,
+                year: updatedYear,
             };
         }
         default:
