@@ -22,8 +22,6 @@ class ReminderForm extends Component {
     componentDidMount() {
         // initialize state for reminder from props if editing
         if (this.props.reminder) {
-            console.log('editing reminder');
-            console.log(this.props.reminder);
             this.setState({ reminder: this.props.reminder });
         }
     }
@@ -42,14 +40,12 @@ class ReminderForm extends Component {
             id: uuid(),
         });
         // reset state after creating reminder
-        console.log('set initial state from create');
         this.setState(this.initialState);
         this.props.closeModal();
     };
 
     updateReminder = () => {
         this.props.onUpdateReminder(this.props.dayId, this.state.reminder);
-        console.log('set initial state from update');
         this.setState(this.initialState);
         this.props.closeModal();
     };

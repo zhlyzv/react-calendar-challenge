@@ -25,7 +25,6 @@ class Month extends Component {
     };
 
     openReminderForm = (dayId, reminder) => {
-        console.log('update reminder');
         this.setState({ reminder });
         this.toggleReminderForm(dayId);
     };
