@@ -21,6 +21,8 @@ Once this is rendered, please implement as many of the following requirements as
 
 ![My attemp 2](assets/my-attempt2.png)
 
+You should be able to preview my app [here](https://5cd49f9b0f75d2a4d58109a4--vibrant-bartik-08bf10.netlify.com/)
+
 What currently works:
 
 - Adding, Updating, Deleting reminders
