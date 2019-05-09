@@ -6,33 +6,29 @@ import CalendarHeader from './CalendarHeader';
 import Month from './Month';
 
 class Calendar extends Component {
-    componentWillMount() {
-        this.props.onSetCurrentMonthRange(new Date());
-    }
-
     render() {
+        const { onSetNextMonth, onSetPrevMonth, currentMonth } = this.props;
         return (
             <div>
                 <CalendarHeader
-                    next={() => this.props.onSetNextMonthRange(this.props.currentMonthRange)}
-                    prev={() => this.props.onSetPrevMonthRange(this.props.currentMonthRange)}
-                    date={this.props.currentMonthRange[0]}
+                    next={onSetNextMonth}
+                    prev={onSetPrevMonth}
+                    date={currentMonth[0].date}
                 />
                 <WeekDays />
-                <Month range={this.props.currentMonthRange} />
+                <Month range={currentMonth} />
             </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    currentMonthRange: state.currentMonthRange,
+    currentMonth: state.month,
 });
 
 const mapDispatchToProps = dispatch => ({
-    onSetCurrentMonthRange: date => dispatch(actions.setCurrentMonthRange(date)),
-    onSetNextMonthRange: range => dispatch(actions.setNextMonthRange(range)),
-    onSetPrevMonthRange: range => dispatch(actions.setPrevMonthRange(range)),
+    onSetNextMonth: () => dispatch(actions.setNextMonth()),
+    onSetPrevMonth: () => dispatch(actions.setPrevMonth()),
 });
 
 export default connect(

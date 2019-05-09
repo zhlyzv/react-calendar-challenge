@@ -13,6 +13,9 @@ const GlobalStyle = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
         padding: 20px;
     }
+    * {
+      box-sizing: border-box;
+    }
 `;
 
 export default GlobalStyle;

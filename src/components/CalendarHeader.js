@@ -3,17 +3,20 @@ import styled from 'styled-components';
 import { format } from 'date-fns';
 import ChangeMonthButton from './ChangeMonthButton';
 
-const CalendarHeader = props => (
-    <Wrapper>
-        <ChangeMonthButton click={props.prev} aria-label='Previous Month'>
-            {'<'}
-        </ChangeMonthButton>
-        {format(props.date, 'MMMM YYYY')}
-        <ChangeMonthButton click={props.next} aria-label='Next Month'>
-            {'>'}
-        </ChangeMonthButton>
-    </Wrapper>
-);
+const CalendarHeader = props => {
+    const { prev, next, date } = props;
+    return (
+        <Wrapper>
+            <ChangeMonthButton click={prev} aria-label='Previous Month'>
+                {'<'}
+            </ChangeMonthButton>
+            {format(date, 'MMMM YYYY')}
+            <ChangeMonthButton click={next} aria-label='Next Month'>
+                {'>'}
+            </ChangeMonthButton>
+        </Wrapper>
+    );
+};
 
 const Wrapper = styled.div`
     display: flex;
