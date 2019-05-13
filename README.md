@@ -19,7 +19,7 @@ Once this is rendered, please implement as many of the following requirements as
 - Ability to delete reminders.
 - Expand the calendar to support more than current month.
 
-## What my attemp at this challenge looks like
+## What my attempt at this challenge looks like
 
 ![My attemp 1](assets/my-attempt1.png)
 
@@ -41,6 +41,7 @@ Things I could improve:
 - Tidy up the structure of the project
 - Split the 'rootReducer' into 'calendar' and 'reminder' - specific files
 - Reduce code duplication in reducers
+- Add unit tests
 - Mobile calendar view - this is currently broken
 - General tidy up of styling (moving common colours and styles to a shared 'theme' object to improve reusability and consistency)
 
